@@ -18,6 +18,7 @@ using System.Text;
 class Hangman {
     public static void Main(string[] args) {
         string word = "Halloween";
+        int counter = 0;
         char[] correctChars = new char[word.Length];    // array of characters that user got right
         Array.Fill(correctChars, '_');
 
@@ -30,18 +31,38 @@ class Hangman {
             // if they have, repeat ( continue)
             // if not check against word:
                 // reduce counter
-                // update word and tf word
+                // update word
+            
+            // TO-DO LIST:
+            // check if word is completed or counter has run out
+            // ToUpper all characters
 
-
-                // check progress()
+            Console.WriteLine(string.Join("", correctChars));
             Console.WriteLine("Guess a letter!");
             char tempChar = char.Parse(Console.ReadLine());
             // bool charSuccess = char.TryParse(Console.ReadLine(), out char value);
             
-            if(guessedChars.ToString().IndexOf(tempChar) == -1){
+            if(guessedChars.ToString().IndexOf(tempChar) == -1){ //  the user has not guessed this character before
                 Console.WriteLine("New character inserted");
+                guessedChars.Append(tempChar);  
+                
+                if(word.IndexOf(tempChar) == -1) { // if character is not in the word
+                    counter++;
+                    Console.WriteLine("Try again D:");
+                    continue;
+                }
+                else{
+                    for(int i = 0; i < word.Length; i++) { // if character is in the word, we loop through the word
+                        if(word[i] == tempChar) {
+                            correctChars[i] = tempChar;
+                        }
+                    }
+                }
             }
-            break;
+            else{
+                    Console.WriteLine("You've tried that!");
+            }
+
 
         }
     }
