@@ -1,58 +1,78 @@
 ﻿using System;
+using System.Text;
 
-public class Hangman {
-
-    public static void Main(string[] args){
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("H A N G M A N");
-        Console.WriteLine("=X=X=X=X=X=X=");
-        int tries = 0;
-        int maxTries = 7;
-        Console.ForegroundColor = ConsoleColor.White;
-        
-        string wordToGuess = "Halloween";
-        string[] wrongGuesses = new string[maxTries];
-        string rightguesses = "";
-
-        while(tries < maxTries) {
-            //Console.WriteLine($"Wrong guesses: {wrongGuesses.ToString()}");
-            Console.WriteLine("Wrong guesses: {0}", string.Join(", ", wrongGuesses));
-
-            Console.Write("WORD: ");
+namespace Hangman {
+    public class HangmanGame {
+        /*TO-DO:
+        - Allow the user to input a hidden word through terminal using ReadKey or to use a random word from a preset.    
+        - 'User proof' the input because right now it'll just take whatever they throw at it, NOT only letters and NOT only single characters...
+        */ 
+        public static void Main(string[] args){
+            int tries = 0;
+            FrameHolder frameHolder = new FrameHolder();
+            string[] frames = frameHolder.hangFrames;
+            string wordToGuess = "Halloween";
+            string wrongGuesses = "";
+            string rightguesses = "";
             
-            foreach(char letter in wordToGuess) {
-                if (rightguesses.Contains(letter.ToString())) {
-                    Console.Write(letter);
-                }else {
-                    Console.Write("_");
+            while(tries < frames.Length) {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+
+                Console.WriteLine("H A N G M A N");
+                Console.WriteLine("=X=X=X=X=X=X=");
+
+                Console.ForegroundColor = ConsoleColor.White;
+
+                Console.WriteLine(frames[tries]);
+
+                Console.Write("WORD: ");
+
+                foreach(char letter in wordToGuess) {
+                    string tempLetter = letter.ToString();
+                    if (rightguesses.ToUpper().Contains(tempLetter.ToUpper())) {
+                        Console.Write(letter);
+                    }else {
+                        Console.Write("_");
+                    }
+                }
+
+                if (tries != 0) {
+                    Console.WriteLine("\nWrong guesses: {0}", string.Join(", ", wrongGuesses.Where(c => !string.IsNullOrEmpty(c.ToString()))));
+                }
+
+
+                Console.WriteLine("\nEnter your guess:");
+                string currentGuess = Console.ReadLine().ToUpper();
+
+                if (rightguesses.ToUpper().Contains(currentGuess) || wrongGuesses.ToUpper().Contains(currentGuess)) {
+                    Console.WriteLine("You've already guessed that letter! Try a different one.");
+                    continue;
+                }else if(wordToGuess.ToUpper().Contains(currentGuess.ToUpper())) {
+                    rightguesses += currentGuess;
+                } else {
+                    wrongGuesses += currentGuess;
+                    tries++;
+                    continue;
+                }
+
+                if (rightguesses.Length.Equals(wordToGuess.Distinct().Count())) {
+                    break;
                 }
             }
-            Console.WriteLine("\nEnter your guess:");
-            string currentGuess = Console.ReadLine();
 
-            if (rightguesses.Contains(currentGuess) || wrongGuesses.Contains(currentGuess)) {
-                Console.WriteLine("You've already guessed that letter! Try a different one.");
-            }else if( wordToGuess.Contains(currentGuess)){
-                rightguesses += currentGuess;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+
+            Console.WriteLine("H A N G M A N");
+            Console.WriteLine("=X=X=X=X=X=X=");
+
+            if (tries >= frames.Length) {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(frameHolder.loseFrame);
             } else {
-                wrongGuesses[tries] = currentGuess;
-                tries++;
-                continue;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(frameHolder.winFrame);
             }
 
-            if (rightguesses.Length.Equals(wordToGuess.Distinct().Count())){
-                break;
-            }
         }
-        if (tries >= 7) {
-            Console.WriteLine("You've hanged someone!!");
-        } else {
-            Console.WriteLine("You guessed the right word!");
-        }
-
     }
-
-    
-
-
 }
