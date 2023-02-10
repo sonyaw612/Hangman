@@ -8,19 +8,19 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Sonya\\.nuget\\packages\\": {}
+    "C:\\Users\\Engels\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sonya\\Revature\\230206-NET\\Trainer_Code\\wk1\\Exercises\\Hangman\\Hangman\\Hangman.csproj",
+      "projectUniqueName": "C:\\Users\\Engels\\230206-NET\\Hangman\\Hangman\\Hangman.csproj",
       "projectName": "Hangman",
-      "projectPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Trainer_Code\\wk1\\Exercises\\Hangman\\Hangman\\Hangman.csproj",
-      "packagesPath": "C:\\Users\\Sonya\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sonya\\Revature\\230206-NET\\Trainer_Code\\wk1\\Exercises\\Hangman\\Hangman\\obj\\",
+      "projectPath": "C:\\Users\\Engels\\230206-NET\\Hangman\\Hangman\\Hangman.csproj",
+      "packagesPath": "C:\\Users\\Engels\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Engels\\230206-NET\\Hangman\\Hangman\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Sonya\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Engels\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
